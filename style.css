@@ -1,0 +1,10 @@
+/*
+Theme Name: Handel
+*/
+@import "./CSS/base.css";
+@import "./CSS/header.css";
+@import "./CSS/slide.css";
+@import "./CSS/home.css";
+@import "./CSS/produtos.css";
+@import "./CSS/produto.css";
+@import "./CSS/footer.css";

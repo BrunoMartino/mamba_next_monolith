@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handel</title>
+</head>
+<body>
+<?php
+
+class Produto {
+  public $preco = 14900;
+
+  public function nome(){
+  return 'Camisa Preta';
+  }
+  public function preco_final(){
+return 'R$ ' . $this->preco /100;
+  }
+}
+
+$camisa = new Produto();
+echo $camisa->nome();
+echo '<br>';
+echo $camisa->preco_final();
+echo '<br>';
+
+print_r(get_class_methods('Produto'));
+?>
+<pre>
+<?php
+$query = new WP_query([
+'post_type' => 'product'
+]);
+print_r($query->posts);
+?>
+<?php foreach($query->posts as $post) {?>
+<h1><?= $post->post_title;?></h1>
+<h1><?= $post->ID;?></h1>
+<?php };?>
+<?php 
+$camisa = wc_get_product(12);
+print_r($camisa);
+echo $camisa->get_price();
+echo '<br>';
+echo $camisa->get_name();
+echo '<br>';
+echo $camisa->get_type()
+?>
+<?php
+if(have_posts()){while(have_posts()){the_post();} ?>
+<h1><?php the_title()?></h1>
+<?php } else { ?>
+Pagina Nao encontrada
+<?php } ?>
+
+</pre>
+</body>
+</html>
+
+Funções
+
+function executar_home() {?>
+
+<div>Teste</div>
+<h2>Segundo Titulo</h2>
+
+<?php }
+add_action('dentro_home','executar_home')
+?>
+
+<?php
+function mudar_titulo($titulo) {
+echo '<h2>' . $titulo . '</h2>';
+}
+add_filter('titulo_home', 'mudar_titulo');
+
+function mudar_the_title($title) {
+  return $title . ' Handel';
+}
+
+add_filter('the_title', 'mudar_the_title');
+
+
+<?php //do_action('dentro_home');?>
+
+<?php echo apply_filters('titulo_home', 'Essa é a home')?>
+
+<?php } } ?>
+<pre>
+  <?php
+    $product = wc_get_product(12);  
+    echo '<p>' . $product->get_status();
+    echo '<p>' .  $product->get_sku();
+    echo '<p>' .  $product->get_name();
+    echo '<p>' .  $product->get_stock_quantity();
+    echo '<p>' .  $product->get_total_sales();
+  ?>
+</pre>
+
+<pre>
+  <?php
+    $customer = new WC_Customer(1); 
+    $user = new WP_User(1);  
+  ?>
+</pre>
+
+<pre>
+  <?php
+ $woo = WC();  
+
+ $cart = $woo->cart->get_cart();
+  
+ foreach ($cart as $item){
+  echo '<p>Nome ' . $item['data']->get_name();
+  echo '<p>Preço ' . $item['data']->get_price();
+ }
+echo '<p>Endereço ' . $woo->countries->get_base_address();
+  ?>
+</pre>
+<?php } } ?>
