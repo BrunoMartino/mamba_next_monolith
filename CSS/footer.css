@@ -1,11 +1,11 @@
 .footer {
   margin-top: 60px;
   background: #000;
-  padding-top: 60px;
+  padding-top: 30px;
 }
 
 .footer img {
-  margin: 0 auto;
+  margin: 0px auto 40px auto;
 }
 .footer-info {
   display: grid;
@@ -17,7 +17,9 @@
 
 @media (max-width: 800px) {
   .footer-info {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
