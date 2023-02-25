@@ -72,4 +72,35 @@ add_filter('woocommerce_enable_order_notes_field', '__return_false');
 
 include(get_template_directory() . '/inc/user-custom-menu.php');
 include(get_template_directory() . '/inc/checkout-customizado.php');
+
+//function handel_change_email_header() {
+//echo '<h2 style="text-align: center;">Mensagem Header</h2>';
+
+//}
+//add_action('woocommerce_email_header', 'handel_change_email_header');
+
+function handel_change_email_footer_text($text){
+  echo 'Handel
+  
+  <ul style="padding:0; margin:0; list-style:none;">
+  <li><a href="/">Facebook</a></li>
+  <li><a href="/">Instagram</a></li>
+  <li><a href="/">Youtube</a></li>
+  </ul>';
+}
+add_filter('woocommerce_email_footer_text', 'handel_change_email_footer_text');
+
+function handel_add_email_meta($order) {
+  $presente = get_post_meta($order->get_id(), '_billing_presente', true);
+  $mensagem = get_post_meta($order->get_id(), 'mensagem_personalizada', true);
+
+  echo '<h2 style="margin:-20px 0 10px 0">Detalhes</h2>
+  <p style="font-size: 16px; border: 1px solid #e5e5e5; padding:10px;"><strong>Mensagem: </strong>' . $mensagem . '</p>
+  <p style="font-size: 16px; border: 1px solid #e5e5e5; padding:10px;"><strong>Presente: </strong>' . $presente . '</p>
+  ';
+}
+
+
+
+add_action('woocommerce_email_order_meta','handel_add_email_meta')
 ?>
