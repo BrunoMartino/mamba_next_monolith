@@ -66,3 +66,10 @@ function handel_product_list($products) { ?>
   <?php } ?>
 </ul>
 <?php } ?>
+<?php
+
+add_filter('woocommerce_enable_order_notes_field', '__return_false');
+
+include(get_template_directory() . '/inc/user-custom-menu.php');
+include(get_template_directory() . '/inc/checkout-customizado.php');
+?>

@@ -6,6 +6,7 @@ body {
   font-family: sans-serif;
   margin: 0px;
   font-size: 1.125rem;
+  overflow-x: unset;
 }
 ul {
   list-style: none;
@@ -35,6 +36,22 @@ img {
   margin-right: auto;
   padding: 0 20px;
 }
+.container-index {
+  margin: 30px auto;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: normal;
+  color: #fff;
+  padding: 30px 0;
+  background: #111;
+  text-transform: uppercase;
+  font-size: 1.125rem;
+  letter-spacing: 0.05rem;
+}
+
 .hidden {
   display: none;
 }
