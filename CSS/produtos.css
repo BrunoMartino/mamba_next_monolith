@@ -95,6 +95,10 @@
   margin-bottom: 20px;
 }
 
+.filtro .woocommerce a {
+  text-decoration: none;
+}
+
 .filtro-preco input {
   font-size: 1rem;
   width: 80px;

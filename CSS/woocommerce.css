@@ -180,3 +180,45 @@
   border-width: 1px;
   border-radius: 0px;
 }
+
+/* Pedido Recebido */
+
+.woocommerce-order-received h2 {
+  font-size: 1.25rem;
+  margin: 10px 0;
+}
+.woocommerce-order-received .woocommerce-thankyou-order-received {
+  color: #fff;
+  background-color: #0066bb;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+}
+.woocommerce-order-received ul.order_details {
+  background-color: #eee;
+  padding: 15px;
+  margin-bottom: 30px;
+}
+.woocommerce-order-received ul.order_details li {
+  margin: 10px;
+}
+.woocommerce-order-received ul.order_details li strong {
+  font-weight: 400;
+  font-size: 1rem;
+}
+.woocommerce-order-received ul.order_details + p {
+  margin-bottom: 30px;
+}
+.woocommerce-page .woocommerce-message .button {
+  font-weight: normal;
+  color: #fff;
+  background-color: #0066bb;
+}
+.woocommerce-page .woocommerce-message .button:hover {
+  color: #fff;
+  background-color: #1188ee;
+}
+
+.woocommerce-orders-table__cell-order-actions {
+  margin: 5px !important;
+}

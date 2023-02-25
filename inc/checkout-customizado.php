@@ -41,12 +41,12 @@ add_action('woocommerce_after_order_notes', 'handel_custom_checkout_field');
 
 //Validar Campo ** na funçao acima, required deve estar true
 
-function handel_custom_checkout_field_process() {
-  if(!$_POST['mensagem_personalizada']) {
-    wc_add_notice('Por Favor escreva uma mensagem.', 'error');
-  }
-}
-add_action('woocommerce_checkout_process', 'handel_custom_checkout_field_process');
+//function handel_custom_checkout_field_process() {
+ // if(!$_POST['mensagem_personalizada']) {
+  //  wc_add_notice('Por Favor escreva uma mensagem.', 'error');
+ // }
+//}
+//add_action('woocommerce_checkout_process', 'handel_custom_checkout_field_process');
 
 //Adicionar ao banco de dados
 
