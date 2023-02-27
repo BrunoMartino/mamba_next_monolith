@@ -37,11 +37,11 @@ foreach($attribute_taxonomies as $attribute) {
   <form class="filtro-preco">
    <div>
     <label for="min_price">De R$</label>
-    <input type="text" placeholder="R$50,00" name="min_price" id="min_price" value="<?= $_GET['min_price']; ?>"></input>
+    <input type="text" placeholder="R$50,00" name="min_price" id="min_price" value="<?= $_GET['min_price'] ?? ''; ?>"></input>
   </div>
    <div>
     <label for="max_price">Até R$</label>
-    <input required type="text" name="max_price" id="max_price" value="<?= $_GET["max_price"]; ?>">
+    <input required type="text" name="max_price" id="max_price" value="<?= $_GET["max_price"] ?? '';?>">
    </div>
    <button type="submit">Filtrar</button>
   </form>

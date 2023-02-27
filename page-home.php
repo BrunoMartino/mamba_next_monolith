@@ -6,13 +6,14 @@ get_header();?>
 
 $products_slide = wc_get_products([
 'limit' => 6,
-'tag' => ['slide'],
+'tag' => ['slide'], 
 ]);
 
 $products_new = wc_get_products([
   'limit' => 9,
   'orderby' => 'date',
   'order' => 'DESC'
+ 
 ]);
 
 $products_sales = wc_get_products([
@@ -20,6 +21,7 @@ $products_sales = wc_get_products([
   'meta_key' => 'total_sales', 
   'orderby' => 'meta_value_num',
   'order' => 'DESC'
+
 ]);
 
 $data = [];
