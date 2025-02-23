@@ -1,0 +1,36 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Campaign {
+  id String @id
+  name String
+  description String?
+  dateInsert DateTime @default(now())
+  dateInitial DateTime? @default(now()) 
+  dateEnd DateTime 
+  deletedAt DateTime? 
+  status Status @default(PAUSADA)
+  category Category? 
+}
+
+enum Status {
+  ATIVA
+  PAUSADA
+  EXPIRADA
+}
+
+enum Category {
+  SEO
+  SOCIAL_MEDIA
+  ADS
+  EMAIL_MARKETING
+  CONTENT_MARKETING
+  ANALYTICS
+}
