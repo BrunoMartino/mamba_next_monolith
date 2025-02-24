@@ -1,7 +1,11 @@
-import { Campaign } from "@prisma/client";
-import { db } from "../libs/prisma";
-import { createCampaignSchema, updateCampaignSchema } from "../libs/validation";
+import { Campaign, Status } from "@prisma/client";
+import { db } from "../_libs/prisma";
+import {
+  createCampaignSchema,
+  updateCampaignSchema,
+} from "../_libs/validation";
 import { nanoid } from "nanoid";
+import { NextResponse } from "next/server";
 
 export const getAllCampaigns = async () => {
   return await db.campaign.findMany({
@@ -109,36 +113,49 @@ export const deleteCampaign = async (id: string) => {
   });
 };
 
-// export const updateExpiredCampaings = async (io: Server) => {
-//   const today = new Date();
-//   try {
-//     const expiredCampaings = await db.campaing.findMany({
-//       where: {
-//         dateEnd: {
-//           lt: today,
-//         },
-//         status: {
-//           not: Status.EXPIRADA,
-//         },
-//       },
-//     });
-//     if (expiredCampaings.length === 0) {
-//       console.log("Nenhuma campanha expirou");
-//       return;
-//     }
-//     await db.campaing.updateMany({
-//       where: {
-//         id: { in: expiredCampaings.map((campaing) => campaing.id) },
-//       },
-//       data: { status: Status.EXPIRADA },
-//     });
-//     io.emit("campaignsUpdated", {
-//       message: "Campanhas expiradas foram atualizadas",
-//     });
-//     console.log(
-//       `Atualizadas ${expiredCampaings.length} campanhas para o status EXPIRADA`
-//     );
-//   } catch (error) {
-//     console.error("Erro ao atualizar campanhas expiradas", error);
-//   }
-// };
+export const updateExpiredCampaigns = async () => {
+  const today = new Date();
+  const expiredCampaigns = await db.campaign.findMany({
+    where: {
+      dateEnd: { lt: today },
+      status: { not: Status.EXPIRADA },
+    },
+  });
+
+  if (expiredCampaigns.length === 0) {
+    console.log("Nenhuma campanha expirou");
+    return { updated: 0 };
+  }
+
+  await db.campaign.updateMany({
+    where: { id: { in: expiredCampaigns.map((c) => c.id) } },
+    data: { status: Status.EXPIRADA },
+  });
+
+  console.log(`Atualizadas ${expiredCampaigns.length} campanhas para EXPIRADA`);
+  return { updated: expiredCampaigns.length };
+};
+
+export const searchCampaigns = async (searchTerm: string) => {
+  return await db.campaign.findMany({
+    where: {
+      deletedAt: null,
+      OR: [
+        { id: { contains: searchTerm } },
+        { name: { contains: searchTerm } },
+      ],
+    },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      status: true,
+      dateInsert: true,
+      dateInitial: true,
+      dateEnd: true,
+    },
+    orderBy: {
+      dateInsert: "asc",
+    },
+  });
+};

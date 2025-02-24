@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import * as CampaignServices from "@/app/services/CampaignServices";
-import { createCampaignSchema } from "@/app/libs/validation";
+import * as CampaignServices from "@/app/_services/CampaignServices";
+import { createCampaignSchema } from "@/app/_libs/validation";
+import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async () => {
+export async function GET(req: NextRequest) {
   try {
     const campaigns = await CampaignServices.getAllCampaigns();
     return NextResponse.json(campaigns, { status: 200 });
@@ -12,24 +12,9 @@ export const GET = async () => {
       { status: 500 }
     );
   }
-};
+}
 
-export const GET_ID = async (
-  req: Request,
-  { params }: { params: { id: string } }
-) => {
-  const campaign = await CampaignServices.singleCampaign(params.id);
-  if (!campaign) {
-    return NextResponse.json(
-      { message: "Campanha não encontrada ou deletada" },
-      { status: 404 }
-    );
-  }
-
-  return NextResponse.json(campaign);
-};
-
-export const POST = async (req: Request) => {
+export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     const validatedData = createCampaignSchema.parse(data);
@@ -43,4 +28,4 @@ export const POST = async (req: Request) => {
       { status: 400 }
     );
   }
-};
+}

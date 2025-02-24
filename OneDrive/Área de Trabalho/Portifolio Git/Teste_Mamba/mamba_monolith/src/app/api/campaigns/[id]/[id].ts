@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import * as CampaignServices from "@/app/services/CampaignServices";
-import { updateCampaignSchema } from "@/app/libs/validation";
+import * as CampaignServices from "@/app/_services/CampaignServices";
+import { updateCampaignSchema } from "@/app/_libs/validation";
 
-export const GET = async (req: Request, ctx: { params: { id: string } }) => {
-  const { id } = await ctx.params;
+export async function GET(req: Request, param: { params: { id: string } }) {
+  const { id } = await param.params;
   try {
     const campaign = await CampaignServices.singleCampaign(id);
     if (!campaign) {
@@ -19,10 +19,10 @@ export const GET = async (req: Request, ctx: { params: { id: string } }) => {
       { status: 500 }
     );
   }
-};
+}
 
-export const PUT = async (req: Request, ctx: { params: { id: string } }) => {
-  const { id } = await ctx.params;
+export async function PUT(req: Request, param: { params: { id: string } }) {
+  const { id } = await param.params;
 
   try {
     const body = await req.json();
@@ -38,10 +38,10 @@ export const PUT = async (req: Request, ctx: { params: { id: string } }) => {
       { status: 500 }
     );
   }
-};
+}
 
-export const DELETE = async (req: Request, ctx: { params: { id: string } }) => {
-  const { id } = await ctx.params;
+export async function DELETE(req: Request, param: { params: { id: string } }) {
+  const { id } = await param.params;
   try {
     await CampaignServices.deleteCampaign(id);
     return NextResponse.json(
@@ -54,4 +54,4 @@ export const DELETE = async (req: Request, ctx: { params: { id: string } }) => {
       { status: 404 }
     );
   }
-};
+}
