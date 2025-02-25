@@ -4,7 +4,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const campaigns = await CampaignServices.getAllCampaigns();
+    const { searchParams } = new URL(req.url);
+    const status = searchParams.get("status") || undefined;
+    const category = searchParams.get("category") || undefined;
+
+    const campaigns = await CampaignServices.getAllCampaigns({
+      status,
+      category,
+    });
     return NextResponse.json(campaigns, { status: 200 });
   } catch {
     return NextResponse.json(

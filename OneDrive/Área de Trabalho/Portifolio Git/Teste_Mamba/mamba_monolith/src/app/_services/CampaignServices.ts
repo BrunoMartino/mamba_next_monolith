@@ -1,15 +1,24 @@
-import { Campaign, Status } from "@prisma/client";
+import { Campaign, Category, Status } from "@prisma/client";
 import { db } from "../_libs/prisma";
 import {
   createCampaignSchema,
   updateCampaignSchema,
 } from "../_libs/validation";
 import { nanoid } from "nanoid";
-import { NextResponse } from "next/server";
 
-export const getAllCampaigns = async () => {
+export const getAllCampaigns = async ({
+  status,
+  category,
+}: {
+  status: Status;
+  category: Category;
+}) => {
   return await db.campaign.findMany({
-    where: { deletedAt: null },
+    where: {
+      deletedAt: null,
+      ...(status ? { status } : {}),
+      ...(category ? { category } : {}),
+    },
     select: {
       id: true,
       name: true,
